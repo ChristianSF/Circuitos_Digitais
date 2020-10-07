@@ -4,6 +4,7 @@ Repositório para guardar meus projetos e atividades, da disciplina de Circuitos
 
 - Software utilizado: Wired Panda.
 - Link: https://wiredpanda.org/
+- GitHub WiredPanda: https://github.com/GIBIS-UNIFESP/wiRedPanda
 
 Projetos: 
   
