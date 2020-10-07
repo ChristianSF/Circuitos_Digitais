@@ -9,4 +9,5 @@ Projetos:
   
  - Flip-Flop D;
  - Registradores;
- - Unidade Lógica de Aritmética;
+ - Registradores de Deslocamento;
+ - Unidade Lógica de Aritmética.
