@@ -1,29 +1,31 @@
-module ULA(SW, HEX2);
-    input [0:17]SW;
-    output [0:6]HEX2;
-    reg [0:3] segmentos;
+module ULA(sel,numum,numdois, HEX2);
+    input [2:0]sel;
+    input [3:0]numum;
+    input [3:0]numdois;
+    output [6:0]HEX2;
+    reg [3:0] segmentos;
     
     always @ (*)
         begin
-            case ({SW[2], SW[1], SW[0]})
-                3'b000: segmentos = SW[14:17] & SW[10:13];
-                3'b001: segmentos = SW[14:17] | SW[10:13];
-                3'b010: segmentos= SW[14:17] + SW[10:13];
-                3'b011: segmentos = SW[14:17] - SW[10:13];
-                3'b100: segmentos = SW[14:17] * 2;
-                3'b101: segmentos = SW[14:17] / 2;
+            case (sel)
+                3'b000: segmentos = numum & numdois;
+                3'b001: segmentos = numum | numdois;
+                3'b010: segmentos= numum + numdois];
+                3'b011: segmentos = numum - numdois;
+                3'b100: segmentos = numum * 2;
+                3'b101: segmentos = numum / 2;
             endcase
         end
     decodificador_BCD printar(.BOX1(segmentos),.HEX2(HEX2));
 endmodule
 
 module decodificador_BCD(BOX1, HEX2);
-    input [0:3]BOX1;
-    output [0:6]HEX2;
-    reg [0:6] segmentos;
+    input [3:0]BOX1;
+    output [6:0]HEX2;
+    reg [6:0] segmentos;
     always @ (*)
         begin
-            case ({BOX1[3], BOX1[2], BOX1[1], BOX1[0]})
+            case (BOX1)
                 4'b0000: segmentos=7'b0000001;
                 4'b0001: segmentos=7'b1001111;
                 4'b0010: segmentos=7'b0010010;
