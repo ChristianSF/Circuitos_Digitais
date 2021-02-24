@@ -1,4 +1,4 @@
-module Diviso_Frequencia (CLK, S);
+module Divisor_Frequencia (CLK, S);
 input CLK;
 output S;
 
