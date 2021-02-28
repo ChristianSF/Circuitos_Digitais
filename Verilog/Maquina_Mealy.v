@@ -8,15 +8,18 @@ output [6:0] HEX4;
 reg [3:0]prox;
 reg [3:0]saida;
 input [1:0]entradas;
+wire OUT;
 
 
 parameter est0 = 3, est1 = 1, est2 = 8, est3 = 0, est4 = 5, 
 			est5 = 7, est6 = 33, est7 = 6, est8 = 2, apagar = 10;
-
-
+			
+	// Chamando o Divisor de Frequência
+	divisor_freq chama_div (.clk (clock),.saida_divisor(OUT));
+			
 	always @(entradas or estado) begin 
 	
-		case(entradas)
+		case(estado)
 			// Primeiro Estado
 			est0: if(entradas == 2'b00) begin
 				prox = est0;
@@ -204,11 +207,11 @@ parameter est0 = 3, est1 = 1, est2 = 8, est3 = 0, est4 = 5,
 	end	
 
 
-	always @(posedge clock or negedge reset)
+	always @(posedge OUT or negedge reset)
 
 		begin 
 			if(reset == 0) begin
-				prox <= est0;
+				estado <= est0;
 				
 			end
 			else begin
@@ -216,24 +219,25 @@ parameter est0 = 3, est1 = 1, est2 = 8, est3 = 0, est4 = 5,
 			end
 		end
 			
-	divisor_freq chama_div (.clk (clock),.saida_divisor(OUT));
-	decodificador_BCD chama_bcd (.BOX1(saida),.HEX4(HEX));
+			//Chamando o decodificador
+	decodificador_BCD chama_bcd (.BOX1(saida),.HEX4(HEX4));
 
 endmodule
 
 module divisor_freq (clk, saida_divisor);
-input clk;
-output reg saida_divisor;
-reg [25:0] out_divisor;
-always @ (posedge clk)
-
-   if (out_divisor == 26'd50000000 )
-            begin
-              out_divisor <= 26'd0;
-              saida_divisor <= 1;
+	input clk;
+	output reg saida_divisor;
+	reg [25:0] out_divisor;
+	
+	always @ (posedge clk)
+	
+		if (out_divisor == 26'd50000000 )
+			begin
+				out_divisor <= 26'd0;
+				saida_divisor <= 1;
          end
      
-    else
+		else
         begin
         out_divisor<= out_divisor+1;
         saida_divisor <= 0;
@@ -244,13 +248,13 @@ always @ (posedge clk)
 endmodule
 
 
-module decodificador_BCD(BOX1, HEX4);
-    input [3:0]BOX1;
+module decodificador_BCD(BOX, HEX4);
+    input [3:0]BOX;
     output [6:0]HEX4;
     reg [6:0] segmentos;
     always @ (*)
         begin
-            case (BOX1)
+            case (BOX)
                 4'b0000: segmentos=7'b0000001;
                 4'b0001: segmentos=7'b1001111;
                 4'b0010: segmentos=7'b0010010;
