@@ -16,4 +16,6 @@ Projetos:
  - Flip-Flop D;
  - Registradores;
  - Registradores de Deslocamento;
- - Unidade Lógica e Aritmética.
+ - Unidade Lógica e Aritmética;
+ - Máquina de Estados de Moore;
+ - Máquina de Estados de Mealy.
