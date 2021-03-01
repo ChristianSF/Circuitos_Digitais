@@ -11,8 +11,8 @@ input [1:0]entradas;
 wire OUT;
 
 
-parameter est0 = 3, est1 = 1, est2 = 8, est3 = 0, est4 = 5, 
-			est5 = 7, est6 = 33, est7 = 6, est8 = 2, apagar = 10;
+parameter est0 = 4'd3, est1 = 4'd1, est2 = 4'd8, est3 = 4'd0, est4 = 4'd5, 
+			est5 = 4'd7, est6 = 4'd9, est7 = 4'd6, est8 = 4'd2, apagar = 4'd10;
 			
 	// Chamando o Divisor de Frequência
 	divisor_freq chama_div (.clk (clock),.saida_divisor(OUT));
@@ -86,7 +86,7 @@ parameter est0 = 3, est1 = 1, est2 = 8, est3 = 0, est4 = 5,
 				saida = 4'b0101;
 			end
 			else if(entradas == 2'b10) begin
-				prox = est3;
+				prox = est2;
 				saida = 4'b1000;
 			end
 			else begin
