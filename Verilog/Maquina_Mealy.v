@@ -15,7 +15,7 @@ parameter est0 = 3, est1 = 1, est2 = 8, est3 = 0, est4 = 5,
 			est5 = 7, est6 = 33, est7 = 6, est8 = 2, apagar = 10;
 			
 	// Chamando o Divisor de Frequência
-	divisor_freq chama_div (.clk (clock),.saida_divisor(OUT));
+	//divisor_freq chama_div (.clk (clock),.saida_divisor(OUT));
 			
 	always @(entradas or estado) begin 
 	
@@ -220,32 +220,32 @@ parameter est0 = 3, est1 = 1, est2 = 8, est3 = 0, est4 = 5,
 		end
 			
 			//Chamando o decodificador
-	decodificador_BCD chama_bcd (.BOX1(saida),.HEX4(HEX4));
+	decodificador_BCD chama_bcd (.BOX(saida),.HEX4(HEX4));
 
 endmodule
 
-module divisor_freq (clk, saida_divisor);
-	input clk;
-	output reg saida_divisor;
-	reg [25:0] out_divisor;
+//module divisor_freq (clk, saida_divisor);
+	//input clk;
+	//output reg saida_divisor;
+	//reg [25:0] out_divisor;
 	
-	always @ (posedge clk)
+	//always @ (posedge clk)
 	
-		if (out_divisor == 26'd50000000 )
-			begin
-				out_divisor <= 26'd0;
-				saida_divisor <= 1;
-         end
+		//if (out_divisor == 26'd50000000 )
+			//begin
+				//out_divisor <= 26'd0;
+				//saida_divisor <= 1;
+         //end
      
-		else
-        begin
-        out_divisor<= out_divisor+1;
-        saida_divisor <= 0;
+		//else
+        //begin
+        //out_divisor<= out_divisor+1;
+        //saida_divisor <= 0;
         
-    end
+    //end
 	 
     
-endmodule
+//endmodule
 
 
 module decodificador_BCD(BOX, HEX4);
